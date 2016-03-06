@@ -1,0 +1,182 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/files/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/files/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/files/css/animate.css">
+    <script type="text/javascript" src="/files/js/angular.min.js"></script>
+    <title>BARK Inc.</title>
+  </head>
+  <body ng-controller="homeController">
+
+    <section id="home" ng-intit="show_img=true">
+      <div class="container">
+        <br>
+        <div class="row" align="center">
+          <h1 class="wow fadeIn" data-wow-delay="1s">Welcome to <strong style="color:#3f9ff6;">BARK Inc.</strong>!</h1>
+          <h2 class="wow fadeIn" data-wow-delay="1.4s">Need mobile game predictions?</h2>
+        </div>
+        <br><br>
+        <div class="col-md-9">
+          <h4 class="wow fadeIn" data-wow-delay="1.8s">Need stats for your game before you spend your time devoloping it?</h4>
+          <h4 class="wow fadeIn" data-wow-delay="2.2s">We @ BARK provide you Statistics and Predictions for your game(s) based on various trend analysis!</h4>
+          <br><br><br>
+          <div id="sticky-anchor"></div>
+          <div id="sticky" align="center" class="row wow fadeIn" data-wow-delay="2.4s">
+            <homebuttons smooth-scroll target="type1" offset="70" ng-click="animateOut(0)">I have a Game in Mind</homebuttons>
+            <homebuttons smooth-scroll target="type2" offset="70" ng-click="animateOut(1)">Need attrs for a new Game</homebuttons>
+          </div>
+        </div>
+        <img class="wow fadeIn move-bg" data-wow-delay="2s" src="/img/phone.png" height="600" width="450">
+        <div class="move" ng-show="show_img" >
+          <img class="wow fadeIn pull-right img-hide" data-wow-delay="2.1s" src="/img/playstore.jpg" height="480" width="290">
+        </div>
+      </div>
+    </section>
+
+    <section id="type1">
+      <div class="container">
+        <div class="col-md-9">
+          <h2 align="center">Enter the <strong style="color:#3f9ff6;">Data</strong> for your Game.</h2><br><br>
+          <div class="row" align="center">
+            <div class="col-md-4 circle_animate" ng-show="circle_one_show">
+              <div id="circle" ng-class="circle_one_class">
+                <br>
+                <h3>NAME</h3>
+                <h3><b>{{type1.name}}</b></h3>
+              </div>
+            </div>
+            <div class="col-md-4 circle_animate" ng-show="circle_two_show">
+              <div id="circle" ng-class="circle_one_class">
+                <br>
+                <h3>SIZE</h3>
+                <h3><b>{{type1.size}}{{type1.sizeTypes}}</b></h3>
+              </div>
+            </div>
+            <div class="col-md-4 circle_animate" ng-show="circle_three_show">
+              <div id="circle" ng-class="circle_one_class">
+                <br>
+                <h3>PRICE</h3>
+                <h3><b>${{type1.price}}</b></h3>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row" align="center">
+            <div class="col-md-4 circle_animate" ng-show="circle_four_show">
+              <div id="circle" ng-class="circle_one_class">
+                <br>
+                <h3>RATING</h3>
+                <h3><b>{{type1.rating}}</b></h3>
+              </div>
+            </div>
+            <div class="col-md-4 circle_animate" ng-show="circle_five_show">
+              <div id="circle" ng-class="circle_one_class">
+                <br>
+                <h3>REVIEWS</h3>
+                <h3><b>{{type1.reviewcount}}</b></h3>
+              </div>
+            </div>
+            <div class="col-md-4 circle_animate" ng-show="circle_six_show">
+              <div id="circle" ng-class="circle_one_class">
+                <br>
+                <h3>DOWNLOADS</h3>
+                <h3><b id="output"></b></h3>
+              </div>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="col-md-offset-2 col-md-8" align="center">
+            <div ng-class="progress_class" ng-init="bar=0" ng-show="progress_show">
+              <div ng-class="progress_bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{bar}}%"  data-toggle="tooltip" title="Likeliness of Download : {{progress_tool}}" id="tooltip">
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="col-md-3 in-phone1 pull-right" ng-show="show_type1" id="myForm">
+          <input type="text" name="name" class="form-control wow fadeIn" data-wow-delay="1s" ng-model="type1.name" placeholder="Game Name (optional)" ng-blur="circle(1)"><br>
+          <select class="form-control wow fadeIn"  name="genre" data-wow-delay="1.1s" ng-model="type1.genre" required>
+              <option value="">Select Genre</option>
+              <option value="0">Action</option>
+              <option value="1">Adventure</option>
+              <option value="2">Arcade</option>
+              <option value="3">Board</option>
+              <option value="4">Brain Games</option>
+              <option value="5">Card</option>
+              <option value="6">Casino</option>
+              <option value="7">Casual</option>
+              <option value="8">Creativity</option>
+              <option value="9">Educational</option>
+              <option value="10">Music</option>
+              <option value="11">Pretend Play</option>
+              <option value="12">Puzzle</option>              
+              <option value="13">Racing</option>
+              <option value="14">Role Playing</option>
+              <option value="15">Simulation</option>
+              <option value="16">Sports</option>
+              <option value="17">Strategy and Tools</option>
+              <option value="18">Trivia</option>
+              <option value="19">Word</option>
+            </select>
+            <br>
+          <div class="form-inline">
+            <input type="number" step="0.01" name="size" class="form-control wow fadeIn" data-wow-delay="1.2s" ng-model="type1.size" placeholder="Size" ng-blur="circle(2)" required>&nbsp;
+            <select class="form-control wow fadeIn"  name="sizeType" data-wow-delay="1.3s" ng-model="type1.sizeTypes" required>
+              <option value="">Select</option>
+              <option value="mb">MB</option>
+              <option value="gb">GB</option>
+            </select>
+          </div>
+          <br>
+          <input type="number" step="0.01" name="price" class="form-control wow fadeIn" data-wow-delay="1.4s" ng-model="type1.price" placeholder="Price" ng-blur="circle(3)" required><br>
+          <input type="number" step="0.1" name="rating" class="form-control wow fadeIn" data-wow-delay="1.5s" ng-model="type1.rating" placeholder="Rating" ng-blur="circle(4)"><br>
+          <input type="number" name="review_count" class="form-control wow fadeIn" data-wow-delay="1.6s" ng-model="type1.reviewcount" placeholder="Review Count" ng-blur="circle(5)"><br>
+          <div class="row" align="center">
+            <button type="submit" class="btn btn-primary wow fadeIn" data-wow-delay="1.6s" ng-click="submit_form(type1)">Submit</button>
+            <button class="btn btn-info wow fadeIn" data-wow-delay="1.6s" ng-click="clear_form(0)">Clear</button>
+          </div>
+          </form>
+        </div>
+        <div class="scroll-top" id="sticky-div" smooth-scroll target="home" ng-click="animateIn()">Top</div>
+    </section>
+
+    <section id="type2">
+      <div class="container">
+        <form class="col-md-3 in-phone2 pull-right" ng-show="show_type2">
+          <input class="form-control wow fadeIn" data-wow-delay="0.4s" ng-model="type2.name" placeholder="Game Name"><br>
+          <select class="form-control wow fadeIn" data-wow-delay="0.8s" ng-model="type2.downloads">
+            <option value="">Select Downloads</option>
+            <option value="4">Very High(100 Million - 1 Billion)</option>
+            <option value="3">High(10 Million - 100 Million)</option>
+            <option value="2">Medium(1 Million - 10 Million)</option>
+            <option value="1">Low(100 Thousand - 1 Million)</option>
+            <option value="0">Very Low( &lt;100 Thousand)</option>
+          </select>
+          <br>
+          <select class="form-control wow fadeIn" data-wow-delay="1s" ng-model="type2.rank">
+            <option value="">Select Rank</option>
+            <option value="10">Top 10</option>
+            <option value="100">Top 100</option>
+            <option value="1000">Top 1000</option>
+            <option value="0">Doesn't Matter</option>
+          </select>
+          <br>
+          <div class="row" align="center">
+            <button class="btn btn-primary wow fadeIn" data-wow-delay="1.4s" ng-click="submit_form(type2)">Submit</button>
+            <button class="btn btn-info wow fadeIn" data-wow-delay="1.8s" ng-click="clear_form(1)">Clear</button>
+          </div>
+          </form>
+        </div>
+    </section>
+    <script type="text/javascript" src="/files/js/jquery-2.2.1.min.js"></script>
+    <script type="text/javascript" src="/files/js/jqfloat.min.js"></script>
+    <script type="text/javascript" src="/files/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/files/js/app.js"></script>
+    <script src="/files/js/wow.min.js"></script>
+    <script src="/files/js/sticky.js"></script>
+    <script>new WOW().init();</script>
+  </body>
+</html>

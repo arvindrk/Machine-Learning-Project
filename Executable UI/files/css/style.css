@@ -1,0 +1,76 @@
+.form-control{
+	border: 0;
+    outline: 0;
+    border-bottom: 2px solid black;
+}
+.form-control:focus{
+	border: 0;
+    outline: 0;
+    border-bottom: 2px solid #0082f9;
+}
+homebuttons{
+	display: inline-block;
+	color: white;
+	font-size: 20px;
+	background-color: #3f9ff6;
+	padding: 5px 30px 5px 30px;
+	border-radius: 5px;	
+	margin: 0px 50px;
+}
+homebuttons:hover{
+	background-color: #0082f9;
+	cursor: pointer;
+}
+.move{
+	position: absolute;
+	right: 160px;
+	top: 152px;
+}
+.move-bg{
+	position: fixed;
+	right: 80px;
+	top: 100px;
+}
+section{
+	height: 710px;
+}
+.scroll-top{
+	position: fixed;
+	display: inline-block;
+	color: white;
+	font-size: 20px;
+	background-color: #3f9ff6;
+	padding: 5px 10px 5px 10px;
+	border-radius: 5px;	
+	margin: 0px 50px;
+	right: 0px;
+	bottom: 10px;
+}
+.scroll-top:hover{
+	background-color: #0082f9;
+	cursor: pointer;
+}
+.img-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+.in-phone1{
+	top: 150px;
+	right:12px;
+}
+.in-phone2{
+	top: 250px;
+	right:12px;
+}
+#sticky.stick {
+    position: fixed;
+    top: 10px;
+    left: 210px;
+}
+#circle {
+    background: #3f9ff6;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    color: white;
+}
