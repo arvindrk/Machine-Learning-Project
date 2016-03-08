@@ -140,6 +140,11 @@ app.controller('homeController', ['$scope','$http',
     $scope.type1 = {};
     $scope.cirlce = {};
     $scope.show_img = true;
+    $scope.type1.sizeTypes = "mb";
+    $scope.progress_data = "Enter the Data for your ";
+    $scope.data_blue = "Game.";
+    $scope.breakout = true;
+    
     $scope.submit_form = function(payload) {
       console.log(payload);
       $scope.progress_class = "progress animated fadeIn";
@@ -148,44 +153,55 @@ app.controller('homeController', ['$scope','$http',
         type:'post',
         data:$('#myForm').serialize(),
         success:function(response){
-            $('#output').html(response);
-            $scope.ajax_success(response);
-            $scope.$digest();
-            $('[data-toggle="tooltip"]').tooltip()
-            $('#tooltip').tooltip({ placement: 'top-right', trigger: 'manual'}).tooltip('show');
+          $scope.breakout = false;
+          $scope.result = response.split(';');
+          $('#output').html($scope.result[0]);
+          $scope.ajax_success($scope.result[0]);
+          $scope.progress_data = 'Estimated RANK : ';
+          $scope.data_blue = $scope.result[1];
+          $('.progress-bar').css('width 100%');
+          $scope.pulse_animate = "";
+          $scope.$digest();
+          $('[data-toggle="tooltip"]').tooltip()
+          $('#tooltip').tooltip({ placement: 'top-right', trigger: 'manual'}).tooltip('show');
         }
       });
+      $scope.progress_data = "Please wait, Downloads is being ";
+      $scope.data_blue = "Predicted!";
+      $scope.pulse_animate = "animated_pulse pulse_head";
       $scope.circle_six_show = true;
       $scope.progress_show = true;
+      var i = 1;
+      var counterBack = setInterval(function(){
+        i++;
+        if(i<86 && $scope.breakout == true){
+          $('.progress-bar').css('width', (i*1.17)+'%');
+        } else {
+          clearTimeout(counterBack);
+        }
+        
+      }, 1000);
     }
+    
     $scope.ajax_success = function(data){
       console.log("AJAX Function Success");
       if(data == " < 100,000"){
-        $scope.progress_bar = "progress-bar progress-bar-danger progress-bar-striped";
         $scope.progress_tool = "Very Low";
-        $scope.bar = 20;
       }
       else if(data == "100,000 - 1,000,000"){
-        $scope.progress_bar = "progress-bar progress-bar-warning progress-bar-striped";
         $scope.progress_tool = "Low";
-        $scope.bar = 40;
       }
       else if(data == "1,000,000 - 10,000,000"){
-        $scope.progress_bar = "progress-bar progress-bar-info progress-bar-striped";
         $scope.progress_tool = "Medium";
-        $scope.bar = 60;
       }
       else if(data == "10,000,000 - 100,000,000"){
-        $scope.progress_bar = "progress-bar progress-bar-info progress-bar-striped";
         $scope.progress_tool = "High";
-        $scope.bar = 80;
       }
       else if(data == "100,000,000 - 1,000,000,000"){
-        $scope.progress_bar = "progress-bar progress-bar-success progress-bar-striped";
         $scope.progress_tool = "Very High";
-        $scope.bar = 100;
       }
     }
+    
     $scope.clear_form = function(data) {      
       if(data == 0){
         $scope.type1 = {};
@@ -194,6 +210,7 @@ app.controller('homeController', ['$scope','$http',
         $scope.type2 = {};
       }
     }
+    
     $scope.circle = function(data){
       $scope.circle_one_class = 'animated zoomInUp';
       if(data == 1){
@@ -212,6 +229,7 @@ app.controller('homeController', ['$scope','$http',
         $scope.circle_five_show = true;
       }
     }
+    
     $scope.animateOut = function(data){
       if(data == 0){
         $scope.show_img = false;
@@ -224,6 +242,7 @@ app.controller('homeController', ['$scope','$http',
         $scope.show_type2 = true; 
       }
     }
+    
     $scope.animateIn = function(){
       $scope.show_img = true;
       $scope.show_type1 = false;

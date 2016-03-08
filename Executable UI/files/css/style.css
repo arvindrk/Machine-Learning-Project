@@ -73,4 +73,20 @@ section{
     height: 180px;
     border-radius: 50%;
     color: white;
+	box-shadow: 5px 5px 5px #888888;
+}
+.animated_pulse {
+  animation-duration: 2.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.1);}
+  100% {transform: scale(1);}
+}
+.pulse_head {
+  animation-name: pulse;
+  animation-duration: 1s;
 }

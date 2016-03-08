@@ -40,7 +40,7 @@
     <section id="type1">
       <div class="container">
         <div class="col-md-9">
-          <h2 align="center">Enter the <strong style="color:#3f9ff6;">Data</strong> for your Game.</h2><br><br>
+          <h2 align="center" ng-class="pulse_animate">{{progress_data}}<strong style="color:#3f9ff6;">{{data_blue}}</strong></h2><br><br>
           <div class="row" align="center">
             <div class="col-md-4 circle_animate" ng-show="circle_one_show">
               <div id="circle" ng-class="circle_one_class">
@@ -91,7 +91,7 @@
           <br><br><br>
           <div class="col-md-offset-2 col-md-8" align="center">
             <div ng-class="progress_class" ng-init="bar=0" ng-show="progress_show">
-              <div ng-class="progress_bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{bar}}%"  data-toggle="tooltip" title="Likeliness of Download : {{progress_tool}}" id="tooltip">
+              <div class="progress-bar progress-bar-success active progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:0%"  data-toggle="tooltip" title="Likeliness of Download : {{progress_tool}}" id="tooltip">
               </div>
             </div>
           </div>
