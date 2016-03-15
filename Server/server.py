@@ -56,7 +56,13 @@ class PostHandler(BaseHTTPRequestHandler):
         
         X_test = [self.genre, self.size, self.price, self.rating, self.review_count]
         clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, max_depth=None, random_state=0).fit(X_train, y_train)
+        # n_estimators = number of boosting stages to perform
+        # max_depth = The maximum depth limits the number of nodes in the tree. Tune this parameter for best performance
+        # .fit = Fit the gradient boosting model.
+
         temp =  clf.predict(X_test)
+        y_test = temp;
+        print clf.score(X_test,y_test)
         temp = int(temp[0])
         if temp == 0:
             downloads = " < 100,000"
@@ -77,7 +83,7 @@ class PostHandler(BaseHTTPRequestHandler):
         f.write(string)
         f.close()
 
-        subprocess.call(['java', '-jar', '/Users/arvindrk/project/RankLib-2.1-patched.jar', '-load', '/Users/arvindrk/project/mymodel.txt', '-rank', '/Users/arvindrk/project/Server/test.txt', '-score', '/Users/arvindrk/project/Server/score.txt','-metric2T', 'ERR@10'])
+        subprocess.call(['java', '-jar', '/Users/arvindrk/project/Ranking/RankLib-2.1-patched.jar', '-load', '/Users/arvindrk/project/Ranking/mymodel.txt', '-rank', '/Users/arvindrk/project/Server/test.txt', '-score', '/Users/arvindrk/project/Server/score.txt','-metric2T', 'ERR@10'])
 
         f = open('score.txt','r')
         line = f.readline()

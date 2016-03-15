@@ -9,9 +9,9 @@ max_a = 0
 max_b = 0
 max_c = 0
 max_d = 0
-
+x = 25000
 for x in xrange(35000):
-	if(x>50):
+	if(x>25000):
 		threshold = x
 		print "Running ",x
 		mydata = pd.read_csv("/Users/arvindrk/Downloads/data40Ksklearn.csv")
