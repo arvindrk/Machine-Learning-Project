@@ -24,7 +24,7 @@ class PostHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
 
-        mydata = pd.read_csv("/Users/arvindrk/Downloads/data40Ksklearn.csv")
+        mydata = pd.read_csv("/Users/arvindrk/project/Ranking/data40Ksklearn.csv")
         y = mydata["downloads"]
         X = mydata.ix[:,:-1]
         X_train = X[:37500]
@@ -103,5 +103,5 @@ if __name__ == '__main__':
     from BaseHTTPServer import HTTPServer
     
     server = HTTPServer(('localhost', 8000), PostHandler)
-    print 'Starting server at 8000, use <Ctrl-C> to stop'
+    print 'Starting Prediction Engine at port 8000.\nServer Listening...'
     server.serve_forever()

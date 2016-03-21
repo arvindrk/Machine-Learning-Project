@@ -144,43 +144,71 @@ app.controller('homeController', ['$scope','$http',
     $scope.progress_data = "Enter the Data for your ";
     $scope.data_blue = "Game.";
     $scope.breakout = true;
+    $scope.heading_1 = false;
+    $scope.analysis = {};
     
-    $scope.submit_form = function(payload) {
-      console.log(payload);
-      $scope.progress_class = "progress animated fadeIn";
-      $.ajax({
-        url:'http://localhost:8000/',
-        type:'post',
-        data:$('#myForm').serialize(),
-        success:function(response){
-          $scope.breakout = false;
-          $scope.result = response.split(';');
-          $('#output').html($scope.result[0]);
-          $scope.ajax_success($scope.result[0]);
-          $scope.progress_data = 'Estimated RANK : ';
-          $scope.data_blue = $scope.result[1];
-          $('.progress-bar').css('width 100%');
-          $scope.pulse_animate = "";
-          $scope.$digest();
-          $('[data-toggle="tooltip"]').tooltip()
-          $('#tooltip').tooltip({ placement: 'top-right', trigger: 'manual'}).tooltip('show');
-        }
-      });
-      $scope.progress_data = "Please wait, Downloads is being ";
-      $scope.data_blue = "Predicted!";
-      $scope.pulse_animate = "animated_pulse pulse_head";
-      $scope.circle_six_show = true;
-      $scope.progress_show = true;
-      var i = 1;
-      var counterBack = setInterval(function(){
-        i++;
-        if(i<86 && $scope.breakout == true){
-          $('.progress-bar').css('width', (i*1.17)+'%');
-        } else {
-          clearTimeout(counterBack);
-        }
-        
-      }, 1000);
+    $scope.submit_form = function(payload,data) {
+      // console.log(payload);
+      if(data == 1){
+        $scope.progress_class = "progress animated fadeIn";
+        $.ajax({
+          url:'http://localhost:8000/',
+          type:'post',
+          data:$('#myForm').serialize(),
+          success:function(response){
+            $scope.breakout = false;
+            $scope.result = response.split(';');
+            $('#output').html($scope.result[0]);
+            $scope.ajax_success($scope.result[0]);
+            $scope.progress_data = 'Estimated RANK : ';
+            $scope.data_blue = $scope.result[1];
+            $('.progress-bar').css('width 100%');
+            $scope.pulse_animate = "";
+            $scope.$digest();
+            $('[data-toggle="tooltip"]').tooltip()
+            $('#tooltip').tooltip({ placement: 'top-right', trigger: 'manual'}).tooltip('show');
+          }
+        });
+        $scope.progress_data = "Please wait, Downloads is being ";
+        $scope.data_blue = "Predicted!";
+        $scope.pulse_animate = "animated_pulse pulse_head";
+        $scope.circle_six_show = true;
+        $scope.progress_show = true;
+        var i = 1;
+        var counterBack = setInterval(function(){
+          i++;
+          if(i<86 && $scope.breakout == true){
+            $('.progress-bar').css('width', (i*1.17)+'%');
+          } else {
+            clearTimeout(counterBack);
+          }
+          
+        }, 1000);
+      }
+      else if (data == 2){
+        $scope.trends = true;
+        $.ajax({
+          url:'http://localhost:8001/',
+          type:'post',
+          data:$('#myForm2').serialize(),
+          success:function(response){
+            $scope.result_2 = response.split(';');
+            $scope.analysis.size = parseFloat($scope.result_2[0]);
+            $scope.analysis.rating = parseFloat($scope.result_2[1]);
+            $scope.analysis.review_count = $scope.result_2[2];
+            $scope.analysis.genre = $scope.result_2[3];
+            $scope.temp_downloads = $scope.result_2[4];
+            console.log($scope.temp_downloads);
+            $scope.temp_downloads = $scope.temp_downloads.replace(/L/g,"");
+            $scope.temp_downloads = $scope.temp_downloads.replace(/\,/g,"");
+            $scope.temp_downloads = $scope.temp_downloads.replace(/\(/g,"");
+            $scope.temp_downloads = $scope.temp_downloads.replace(/\)/g,"");
+            $scope.analysis.downloads = $scope.temp_downloads.split('-');
+            console.log($scope.analysis);
+            $scope.$digest();
+          }
+        });
+      }
     }
     
     $scope.ajax_success = function(data){
@@ -228,6 +256,15 @@ app.controller('homeController', ['$scope','$http',
       else if(data == 5){
         $scope.circle_five_show = true;
       }
+      else if(data == 11){
+        $scope.circle2_one_show = true;
+      }
+      else if(data == 12){
+        $scope.circle2_two_show = true;
+      }
+      else if(data == 13){
+        $scope.circle2_three_show = true;
+      }
     }
     
     $scope.animateOut = function(data){
@@ -235,6 +272,7 @@ app.controller('homeController', ['$scope','$http',
         $scope.show_img = false;
         $scope.show_type1 = true;
         $scope.show_type2 = false;
+        $scope.heading_1 = true;
       }
       else{
         $scope.show_img = false;
